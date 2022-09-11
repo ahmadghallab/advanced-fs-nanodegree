@@ -1,15 +1,8 @@
 import express from 'express'
-import students from './api/students';
-import teachers from './api/teachers';
-import logger from '../middlewares/logger';
+import images from './api/images';
 
 const routes = express.Router()
 
-routes.get('/', logger, (req, res) => {
-  res.send('main route')
-});
-
-routes.use('/students', students);
-routes.use('/teachers', teachers);
+routes.use('/images', images);
 
 export default routes;
