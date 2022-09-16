@@ -1,15 +1,15 @@
-import { CustomError } from "./custom-error";
+import { CustomError } from './custom-error'
 
 export default class ServerError extends CustomError {
-  statusCode = 500;
+    statusCode = 500
 
-  constructor() {
-    super('Server error');
+    constructor() {
+        super('Server error')
 
-    Object.setPrototypeOf(this, ServerError.prototype);
-  }
+        Object.setPrototypeOf(this, ServerError.prototype)
+    }
 
-  serializeErrors() {
-    return [{ message: 'Something went wrong' }]
-  }
+    serializeErrors() {
+        return [{ message: 'Something went wrong' }]
+    }
 }
