@@ -17,3 +17,15 @@ GET /api/images/?filename=image1&width=100&height=100
 ## Response
 
 Just a resized image
+
+## Status Codes
+
+The API returns the following status codes:
+
+| Status Code | Description             |
+| :---------- | :---------------------- |
+| 200         | `OK`                    |
+| 201         | `CREATED`               |
+| 400         | `BAD REQUEST`           |
+| 404         | `NOT FOUND`             |
+| 500         | `INTERNAL SERVER ERROR` |
