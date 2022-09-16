@@ -1,11 +1,22 @@
-import express from 'express';
-import routes from './routes';
+import express from 'express'
+import 'express-async-errors'
+import { json } from 'body-parser'
+import routes from './routes'
+import errorHandler from './middlewares/error-handlers'
+import NotFoundError from './errors/not-found-error'
 
-const app = express();
-const port = 3002;
+const app = express()
+app.use(json())
+const port = 3002
 
-app.use('/api', routes);
+app.use('/api', routes)
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.all('*', () => {
+    throw new NotFoundError()
+})
 
-export default app;
+app.use(errorHandler)
+
+app.listen(port, () => console.log(`Listening on port ${port}!`))
+
+export default app

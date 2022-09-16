@@ -14,10 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const __1 = __importDefault(require(".."));
+const images_1 = require("../routes/api/images");
 const request = (0, supertest_1.default)(__1.default);
 describe('Test endpoint responses', () => {
-    it('gets the api endpoint', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get('/api');
+    it('gets the image resize endpoint', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/api/images?filename=image1&width=200&height=200');
         expect(response.status).toBe(200);
+    }));
+});
+describe('Test if the source image exists', () => {
+    it('srcImageExist func should be defined', () => __awaiter(void 0, void 0, void 0, function* () {
+        expect(images_1.srcImageExist).toBeDefined;
     }));
 });
