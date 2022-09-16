@@ -29,6 +29,6 @@ describe('Test image resize functionality', () => {
         const outLoc =
             path.resolve('./') + `/assets/thumb/image1_${width}_${height}.jpg`
 
-        expect(await imageResize(srcLoc, outLoc, width, height)).toBe(true);
+        expect(await imageResize(srcLoc, outLoc, width, height)).toBe(true)
     })
 })
