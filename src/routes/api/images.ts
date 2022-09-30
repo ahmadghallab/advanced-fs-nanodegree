@@ -3,7 +3,6 @@ import path from 'path'
 import { query, validationResult } from 'express-validator'
 import RequestValidationError from '../../errors/request-validation-error'
 import { imageExist } from '../../utilities/imageExist'
-import { imageResize } from '../../services/imageResize'
 
 const images = express.Router()
 
@@ -27,10 +26,6 @@ images.get('/', validationRoles, async (req: Request, res: Response) => {
     }
 
     if (imageExist(srcLoc, outLoc)) {
-        return res.status(200).sendFile(outLoc)
-    }
-
-    if (await imageResize(srcLoc, outLoc, width, height)) {
         return res.status(200).sendFile(outLoc)
     }
 
