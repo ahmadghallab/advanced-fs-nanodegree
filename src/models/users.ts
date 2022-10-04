@@ -1,5 +1,6 @@
 // @ts-ignore
 import Client from "../database";
+import { Password } from "../services/password";
 
 export type User = {
   id?: number;
@@ -13,7 +14,7 @@ export class UserModel {
     try {
       // @ts-ignore
       const conn = await Client.connect();
-      const sql = 'SELECT * FROM users';
+      const sql = 'SELECT id, first_name, last_name FROM users';
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -22,9 +23,9 @@ export class UserModel {
     }
   }
 
-  async show(id: number): Promise<User> {
+  async show(id: string): Promise<User> {
     try {
-    const sql = 'SELECT * FROM users WHERE id=($1)'
+    const sql = 'SELECT id, first_name, last_name FROM users WHERE id=($1)'
     // @ts-ignore
     const conn = await Client.connect()
 
@@ -44,7 +45,9 @@ export class UserModel {
       // @ts-ignore
       const conn = await Client.connect()
 
-      const result = await conn.query(sql, [b.first_name, b.last_name, b.password])
+      const hashedPassword = await Password.toHash(b.password)
+
+      const result = await conn.query(sql, [b.first_name, b.last_name, hashedPassword])
 
       const user = result.rows[0]
 
@@ -56,7 +59,7 @@ export class UserModel {
     }
   }
 
-  async delete(id: number): Promise<User> {
+  async delete(id: string): Promise<User> {
     try {
       const sql = 'DELETE FROM users WHERE id=($1)'
       // @ts-ignore

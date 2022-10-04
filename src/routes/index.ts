@@ -1,8 +1,8 @@
 import express from 'express'
-import images from './api/images'
+import users from './api/users'
 
 const routes = express.Router()
 
-routes.use('/images', images)
+routes.use('/users', users)
 
 export default routes
