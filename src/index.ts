@@ -5,11 +5,13 @@ import routes from './routes'
 import errorHandler from './middlewares/error-handlers'
 import NotFoundError from './errors/not-found-error'
 import cookieSession from 'cookie-session'
+import cors from 'cors';
 
 const app = express()
 const port = 3002
 app.set("trust proxy", true);
 app.use(json());
+app.use(cors())
 
 app.use(cookieSession({
   name: 'session',

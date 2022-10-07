@@ -1,4 +1,4 @@
-import { User, UserModel } from "../models/users";
+import { UserModel } from "../models/users";
 
 const user = new UserModel();
 
@@ -14,15 +14,16 @@ describe('User Model', () => {
 
   it('create method should add an user', async () => {
     const result = await user.create({
+      email: 'ahmadghallab@gmail.com',
       first_name: 'Ahmad',
       last_name: 'Ghallab',
       password: '123456'
     });
     expect(result).toEqual({
       id: 1,
+      email: 'ahmadghallab@gmail.com',
       first_name: 'Ahmad',
-      last_name: 'Ghallab',
-      password: '123456'
+      last_name: 'Ghallab'
     });
   });
 
@@ -30,9 +31,9 @@ describe('User Model', () => {
     const result = await user.index();
     expect(result).toEqual([{
       id: 1,
+      email: 'ahmadghallab@gmail.com',
       first_name: 'Ahmad',
-      last_name: 'Ghallab',
-      password: '123456'
+      last_name: 'Ghallab'
     }]);
   });
 
@@ -40,16 +41,9 @@ describe('User Model', () => {
     const result = await user.show(1);
     expect(result).toEqual({
       id: 1,
+      email: 'ahmadghallab@gmail.com',
       first_name: 'Ahmad',
-      last_name: 'Ghallab',
-      password: '123456'
+      last_name: 'Ghallab'
     });
-  });
-
-  it('delete method should remove the user', async () => {
-    user.delete(1);
-    const result = await user.index()
-
-    expect(result).toEqual([]);
   });
 })
