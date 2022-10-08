@@ -104,7 +104,7 @@ The application will run on <http://localhost:3002/>.
 
 ## Running the unit tests
 
-Use the following command to run the unit tests, please make sure to change the `ENV` value in `.env` file to `test`:
+Use the following command to run the unit tests:
 
 ```bash
 yarn test

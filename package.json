@@ -1,16 +1,17 @@
 {
-    "name": "ts-basics",
+    "name": "fs-nanodegree",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "src/index.ts",
     "license": "MIT",
+    "author": "Ahmad Ghallab",
     "scripts": {
         "start": "nodemon src/index.ts",
         "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./dist --onSuccess \"node ./dist/index.js\"",
-        "migrate": "db-migrate --env test up && db-migrate up",
+        "migration": "db-migrate",
         "build": "yarn tsc",
         "lint": "eslint src/**/*.ts",
         "lint:f": "eslint src/**/*.ts --fix",
-        "test": "ENV=test db-migrate --env test up && yarn build && yarn jasmine && db-migrate db:drop test",
+        "test": "export ENV=test && db-migrate --env test up && yarn build && yarn jasmine && db-migrate db:drop test",
         "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
     },
     "devDependencies": {

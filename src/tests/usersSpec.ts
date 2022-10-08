@@ -1,6 +1,17 @@
+import supertest from "supertest";
+import app from "..";
+import { UserModel } from "../models/users";
 // @ts-ignore
 import Client from "../database";
-import { UserModel } from "../models/users";
+
+const request = supertest(app)
+
+describe('Test endpoint responses', () => {
+  it('gets the index endpoint', async () => {
+    const response = await request.get('/api/users')
+    expect(response.status).toBe(401)
+  })
+})
 
 const user = new UserModel();
 

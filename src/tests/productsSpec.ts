@@ -1,6 +1,17 @@
+import supertest from "supertest";
+import app from "..";
+import { ProductModel } from "../models/products";
 // @ts-ignore
 import Client from "../database";
-import { ProductModel } from "../models/products";
+
+const request = supertest(app)
+
+describe('Test endpoint responses', () => {
+  it('gets the index endpoint', async () => {
+    const response = await request.get('/api/products')
+    expect(response.status).toBe(200)
+  })
+})
 
 const product = new ProductModel();
 

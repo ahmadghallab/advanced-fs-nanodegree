@@ -22,7 +22,7 @@ orders.get(
   return res.status(200).json({
     status: true,
     message: 'Current order by user',
-    data: result
+    data: result || null
   })
   
 })

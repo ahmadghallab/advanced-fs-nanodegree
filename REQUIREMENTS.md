@@ -80,6 +80,30 @@ These are the notes from a meeting with the frontend developer that describe wha
         }
         ```
 
+-   Current authenticated user **`token required`**
+
+    -   HTTP verb `GET`
+    -   Endpoint:- `/api/users/auth/current`
+    -   Request Body
+
+        ```json
+          N/A
+        ```
+
+    -   Response Body -- `User object`
+
+        ```json
+        {
+            "status": true,
+            "message": "Current authenticated user",
+            "data": {
+                "id": 1,
+                "email": "ahmadghallab@gmail.com",
+                "iat": 1665222536
+            }
+        }
+        ```
+
 -   Create **`token required`**
 
     -   HTTP verb `POST`
@@ -110,7 +134,7 @@ These are the notes from a meeting with the frontend developer that describe wha
         }
         ```
 
--   Sign in (this will set the `token` in a cookie session for further requests)
+-   Sign in **`Sets the token on the client within a cookie for further requests`**
 
     -   HTTP verb `POST`
     -   Endpoint:- `/api/users/signin`
@@ -141,7 +165,7 @@ These are the notes from a meeting with the frontend developer that describe wha
         }
         ```
 
--   Sign out (will clear the token and destroy the session)
+-   Sign out **`Clear the token and destroy the session`**
 
     -   HTTP verb `POST`
     -   Endpoint:- `/api/users/signout`

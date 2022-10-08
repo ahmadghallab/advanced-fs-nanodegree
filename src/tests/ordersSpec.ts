@@ -1,8 +1,19 @@
-// @ts-ignore
-import Client from "../database";
+import supertest from "supertest";
+import app from "..";
 import { OrderModel } from "../models/orders";
 import { ProductModel } from "../models/products";
 import { UserModel } from "../models/users";
+// @ts-ignore
+import Client from "../database";
+
+const request = supertest(app)
+
+describe('Test endpoint responses', () => {
+  it('gets the current order by user endpoint', async () => {
+    const response = await request.get('/api/orders/current-by-user')
+    expect(response.status).toBe(401)
+  })
+})
 
 const user = new UserModel();
 const product = new ProductModel();
