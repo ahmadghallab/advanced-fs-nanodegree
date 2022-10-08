@@ -8,11 +8,12 @@ import cookieSession from 'cookie-session'
 import cors from 'cors';
 
 const app = express()
-const port = 3002
+const port = process.env.PORT
+
 app.set("trust proxy", true);
+
 app.use(json());
 app.use(cors())
-
 app.use(cookieSession({
   name: 'session',
   signed: false,

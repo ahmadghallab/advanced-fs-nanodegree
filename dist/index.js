@@ -12,7 +12,7 @@ const not_found_error_1 = __importDefault(require("./errors/not-found-error"));
 const cookie_session_1 = __importDefault(require("cookie-session"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const port = 3002;
+const port = process.env.PORT;
 app.set("trust proxy", true);
 app.use((0, body_parser_1.json)());
 app.use((0, cors_1.default)());

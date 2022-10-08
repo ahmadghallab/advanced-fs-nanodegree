@@ -17,19 +17,31 @@ const users = express.Router()
 // Users index
 users.get('/', currentUser, requireAuth, async (req: Request, res: Response) => {  
   const result = await user.index();
-  return res.status(200).json(result)
+  return res.status(200).json({
+    status: true,
+    message: 'Users list',
+    data: result
+  })
 })
 
 // Show user by id
 users.get('/:id', currentUser, requireAuth, async (req: Request, res: Response) => {
   const id = (req.params.id as unknown) as number
   const result = await user.show(id);
-  return res.status(200).json(result)
+  return res.status(200).json({
+    status: true,
+    message: 'User by id',
+    data: result
+  })
 })
 
 // Get current authenticated user
 users.get('/auth/current', currentUser, requireAuth,  (req: Request, res: Response) => {
-  res.send({ currentUser: req.currentUser || null });
+  return res.status(200).json({
+    status: true,
+    message: 'Current authenticated user',
+    data: req.currentUser || null 
+  })
 });
 
 // Sign up
@@ -38,6 +50,12 @@ users.post(
   signUpValidationRules,
   validateRequest,
   async (req: Request, res: Response) => {
+
+    const existingUser = await user.findByEmail(req.body.email);
+
+    if (existingUser) {
+      throw new BadRequestError('This email has taken');
+    }
 
   const result = await user.create({
     email: req.body.email,
@@ -59,10 +77,9 @@ users.post(
   }
 
   return res.status(201).json({
-    id: result.id,
-    email: result.email,
-    first_name: result.first_name,
-    last_name: result.last_name,
+    status: true,
+    message: 'User created successfully',
+    data: result
   })
 })
 
@@ -103,13 +120,17 @@ users.post(
       jwt: userJwt
     };
 
-    res.status(200).send({
-      token: userJwt,
-      user: {
-        id: existingUser.id,
-        email: existingUser.email,
-        first_name: existingUser.first_name,
-        last_name: existingUser.last_name,
+    res.status(200).json({
+      status: true,
+      message: 'Logged in successfully',
+      data: {
+        token: userJwt,
+        user: {
+          id: existingUser.id,
+          email: existingUser.email,
+          first_name: existingUser.first_name,
+          last_name: existingUser.last_name,
+        }
       }
     });
   }
@@ -119,7 +140,11 @@ users.post(
 users.post('/signout', (req: Request, res: Response) => {
   req.session = null;
 
-  res.send({});
+  res.status(200).json({
+    status: true,
+    message: 'Logged out successfully',
+    data: null
+  })
 });
 
 

@@ -11,13 +11,13 @@ const order = new OrderModel();
 describe('Order Model', () => {
 
   beforeAll(async () => {
-    user.create({
+    await user.create({
       email: 'ahmadghallab@gmail.com',
       first_name: 'Ahmad',
       last_name: 'Ghallab',
       password: '123456'
     });
-    product.create({
+    await product.create({
       name: 'product 1',
       price: 5
     })
@@ -26,7 +26,7 @@ describe('Order Model', () => {
   afterAll(async () => {
     // @ts-ignore
     const conn = await Client.connect();
-    const sql = 'DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;\n DELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;\n DELETE FROM orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n';
+    const sql = 'DELETE FROM orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;\n DELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;\n';
   
     await conn.query(sql);
     conn.release();

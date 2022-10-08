@@ -1,8 +1,20 @@
+// @ts-ignore
+import Client from "../database";
 import { UserModel } from "../models/users";
 
 const user = new UserModel();
 
 describe('User Model', () => {
+
+  afterAll(async () => {
+    // @ts-ignore
+    const conn = await Client.connect();
+    const sql = 'DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;';
+  
+    await conn.query(sql);
+    conn.release();
+  })
+
   it('should have an index method', () => {
     expect(user.index).toBeDefined();
   });

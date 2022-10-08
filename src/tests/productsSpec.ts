@@ -32,7 +32,8 @@ describe('Product Model', () => {
     expect(result).toEqual({
       id: 1,
       name: 'product 1',
-      price: 5
+      price: 5,
+      category: null
     });
   });
 
@@ -41,7 +42,8 @@ describe('Product Model', () => {
     expect(result).toEqual([{
       id: 1,
       name: 'product 1',
-      price: 5
+      price: 5,
+      category: null
     }]);
   });
 
@@ -50,7 +52,8 @@ describe('Product Model', () => {
     expect(result).toEqual({
       id: 1,
       name: 'product 1',
-      price: 5
+      price: 5,
+      category: null
     });
   });
 })

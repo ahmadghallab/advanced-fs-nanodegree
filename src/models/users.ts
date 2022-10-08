@@ -2,7 +2,7 @@
 import Client from "../database";
 import { Password } from "../services/password";
 
-export type User = {
+export type User = { 
   id?: number;
   email: string;
   first_name: string;
@@ -50,7 +50,7 @@ export class UserModel {
 
       const result = await conn.query(sql, [b.first_name, b.email, b.last_name, hashedPassword])
 
-      const user = result.rows[0]
+      const { password, ...user } = result.rows[0];
 
       conn.release()
 
@@ -68,7 +68,7 @@ export class UserModel {
 
       const result = await conn.query(sql, [id])
 
-      const user = result.rows[0]
+      const { password, ...user } = result.rows[0];
 
       conn.release()
 
