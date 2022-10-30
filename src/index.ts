@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import 'express-async-errors'
 import { json } from 'body-parser'
 import routes from './routes'
@@ -23,6 +23,10 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to store front API')
+})
 
 app.use('/api', routes)
 

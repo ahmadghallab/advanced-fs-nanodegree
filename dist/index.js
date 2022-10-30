@@ -24,6 +24,9 @@ app.use((0, cookie_session_1.default)({
     // Cookie Options
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
+app.get('/', (req, res) => {
+    res.send('Welcome to store front API');
+});
 app.use('/api', routes_1.default);
 app.all('*', () => {
     throw new not_found_error_1.default();
