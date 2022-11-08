@@ -13,7 +13,8 @@
         "lint": "eslint src/**/*.ts",
         "lint:f": "eslint src/**/*.ts --fix",
         "test": "export ENV=test && db-migrate --env test up && yarn build && yarn jasmine && db-migrate db:drop test",
-        "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+        "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+        "deploy": "yarn build && eb list && eb use store-front-api-dev && eb deploy"
     },
     "devDependencies": {
         "@types/bcrypt": "^5.0.0",
